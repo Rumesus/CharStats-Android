@@ -49,7 +49,7 @@ public class OcrEngine {
                     best = txt == null ? "" : txt;
                 }
             } finally {
-                api.end();
+                api.recycle();
                 if (b != source) b.recycle();
             }
         }
