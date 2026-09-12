@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.4.3'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    implementation {
+        exclude group: 'com.github.spotbugs', module: 'spotbugs-annotations'
+    }
+}
+
+dependencies {
+    implementation 'org.apache.poi:poi-ooxml:5.5.1'
+    implementation 'org.apache.poi:poi-scratchpad:5.5.1'
+    implementation 'com.fasterxml:aalto-xml:1.3.3'
+    implementation 'stax:stax-api:1.0.1'
+    implementation 'org.apache.logging.log4j:log4j-api:2.26.1'
+}
+
+shadowJar {
+    archiveFileName = 'poishadow-all.jar'
+
+    mergeServiceFiles {
+        exclude 'META-INF/services/javax.xml.stream.*'
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.WARN
+
+    exclude 'repackage/**'
+    exclude 'LICENSE.txt'
+    exclude 'NOTICE.txt'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/maven/**'
+    exclude 'META-INF/services/javax.xml.stream.XMLEventFactory'
+    exclude 'META-INF/services/javax.xml.stream.XMLInputFactory'
+    exclude 'META-INF/services/javax.xml.stream.XMLOutputFactory'
+
+    dependencies {
+        exclude(dependency('com.github.virtuald:curvesapi'))
+        exclude(dependency('commons-codec:commons-codec'))
+        exclude(dependency('org.apache.commons:commons-lang3'))
+    }
+
+    relocate 'javax.xml.namespace', 'org.apache.poi.javax.xml.namespace'
+    relocate 'javax.xml.stream', 'org.apache.poi.javax.xml.stream'
+    relocate 'javax.xml.XMLConstants', 'org.apache.poi.javax.xml.XMLConstants'
+    relocate 'java.awt.font.FontRenderContext', 'org.apache.poi.java.awt.font.FontRenderContext'
+    relocate 'java.awt.font.TextLayout', 'org.apache.poi.java.awt.font.TextLayout'
+    relocate 'java.awt.geom.AffineTransform', 'org.apache.poi.java.awt.geom.AffineTransform'
+    relocate 'java.awt.geom.Dimension2D', 'org.apache.poi.java.awt.geom.Dimension2D'
+    relocate 'java.awt.image.BufferedImage', 'org.apache.poi.java.awt.image.BufferedImage'
+    relocate 'java.awt.Color', 'org.apache.poi.java.awt.Color'
+    relocate 'java.awt.Dimension', 'org.apache.poi.java.awt.Dimension'
+    relocate 'javax.imageio.ImageIO', 'org.apache.poi.javax.imageio.ImageIO'
+    relocate 'javax.imageio.ImageReader', 'org.apache.poi.javax.imageio.ImageReader'
+    relocate 'javax.imageio.stream.ImageInputStream', 'org.apache.poi.javax.imageio.stream.ImageInputStream'
+    relocate 'javax.imageio.metadata.IIOMetadata', 'org.apache.poi.javax.imageio.metadata.IIOMetadata'
+}
+
+jar.dependsOn shadowJar

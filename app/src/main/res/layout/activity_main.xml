@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Тариф / 1800:"
+            android:paddingEnd="8dp"/>
+
+        <EditText
+            android:id="@+id/rate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:text="420" />
+
+        <CheckBox
+            android:id="@+id/ocrAllPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OCR усіх сторінок PDF"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox android:id="@+id/langUkr" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="UKR" android:checked="true"/>
+        <CheckBox android:id="@+id/langRus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="RUS" android:checked="true"/>
+        <CheckBox android:id="@+id/langEng" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ENG" android:checked="true"/>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/pickFiles" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Вибрати файли"/>
+            <Button android:id="@+id/pickFolder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Вибрати папку"/>
+            <Button android:id="@+id/clear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Очистити"/>
+            <Button android:id="@+id/exportExcel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Excel"/>
+            <Button android:id="@+id/clientPdf" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PDF для клієнта"/>
+            <Button android:id="@+id/sharePdf" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Поділитися PDF"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"/>
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Разом: 0 файлів"
+        android:textStyle="bold"
+        android:padding="4dp"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/previewImage"
+            android:layout_width="35%"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:background="#EEEEEE"/>
+        <TextView
+            android:id="@+id/previewText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:text="Попередній перегляд"/>
+    </LinearLayout>
+</LinearLayout>
